@@ -8,10 +8,10 @@ type TableRowType = {
 
 function TableRow(props: TableRowType): JSX.Element {
   return (
-    <div className="p-4 flex bg-[#3b3b3b] text-white">
+    <div className="p-4 flex text-[#3b3b3b] shadow-md">
       <div className="w-[180px]">shorten URL</div>
       <div className="w-[180px]">{props.shortenURL}</div>
-      <div className="w-[220px] flex">
+      <div className="w-[220px] flex justify-between">
         <Button text="create" onClick={() => {}} />
         <Button color="#54c64a" text="edit" onClick={() => {}} />
         <Button color="#fc5151" text="delete" onClick={() => {}} />
