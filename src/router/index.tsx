@@ -4,6 +4,7 @@ import React, { ReactElement, Suspense } from "react"
 const HomePage = React.lazy(() => import("../pages/Home"))
 const LoginPage = React.lazy(() => import("../pages/Login"))
 const SignUpPage = React.lazy(() => import("../pages/SignUp"))
+const OverviewPage = React.lazy(() => import("../pages/Overview"))
 
 export const RouterMap = (): ReactElement | null =>
   useRoutes([
@@ -28,6 +29,14 @@ export const RouterMap = (): ReactElement | null =>
       element: (
         <Suspense>
           <SignUpPage />
+        </Suspense>
+      ),
+    },
+    {
+      path: "/overview",
+      element: (
+        <Suspense>
+          <OverviewPage />
         </Suspense>
       ),
     },
