@@ -24,7 +24,8 @@ function Login(): JSX.Element {
   return (
     <div className="flex justify-center items-center h-full">
       <Box>
-        <div className="mb-4">
+        <div className="text-[24px]">Short Url Service</div>
+        <div className="mb-4 w-full">
           <TextField
             label="name"
             value={name}
@@ -36,7 +37,9 @@ function Login(): JSX.Element {
             onChange={event => setPassword(event.target.value)}
           />
         </div>
-        <Button text="login" onClick={login} />
+        <div className="w-full flex justify-end">
+          <Button text="login" onClick={login} />
+        </div>
       </Box>
     </div>
   )

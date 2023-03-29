@@ -3,13 +3,19 @@ import React from "react"
 type ButtonType = {
   text: string
   onClick: () => void
+  color?: string | undefined
 }
 
 function Button(props: ButtonType): JSX.Element {
   return (
     <div
-      className="px-4 cursor-pointer py-1 bg-white rounded-[15px] drop-shadow-md text-[#2f2f2f]"
+      className={
+        "px-4 text-[12px] cursor-pointer py-1 rounded-[15px] drop-shadow-md text-white"
+      }
       onClick={props.onClick}
+      style={{
+        backgroundColor: props.color ? props.color : "#2d84ff",
+      }}
     >
       {props.text}
     </div>
