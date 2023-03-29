@@ -1,8 +1,9 @@
-import React, { useContext, useEffect } from "react"
+import React, { useContext } from "react"
 import Box from "../components/common/Box"
 import TableRow from "../components/common/TableRow"
 import TableHeader from "../components/common/TableHeader"
 import { ModalContext } from "../store/context/ModalContext"
+import Modal from "../components/common/Modal"
 
 const data = [
   {
@@ -41,20 +42,26 @@ const data = [
 function Overview(): JSX.Element {
   const ctx = useContext(ModalContext)
 
+  const handleDelete = () => {
+    ctx.openModal(
+      <Modal
+        title="Delete"
+        content="do you want to delete this url ?"
+        confirm={() => {}}
+        cancel={ctx.closeModal}
+      />
+    )
+  }
+
   const renderURLs = data.map(item => (
     <TableRow
       key={item.shorten}
       shortenURL={item.shorten}
       originURL={item.origin}
+      delete={handleDelete}
     />
   ))
 
-  useEffect(() => {
-    ctx.openModal({
-      title: "gogog",
-      content: "xs",
-    })
-  }, [])
   return (
     <div className="flex justify-center items-center h-full">
       <Box>

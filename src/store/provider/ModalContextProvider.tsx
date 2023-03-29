@@ -1,28 +1,18 @@
 import React, { PropsWithChildren, useState } from "react"
 import { ModalContext } from "../context/ModalContext"
-import { ModalContentType } from "../../types/ModalContentType"
-import Modal from "../../components/common/Modal"
 type ModalContextProviderType = {}
 
 export const ModalContextProvider: React.FunctionComponent<
   PropsWithChildren<ModalContextProviderType>
 > = props => {
   const [open, setOpen] = useState(false)
-  const [content, setContent] = useState<ModalContentType>({
-    title: "title",
-    content: "content",
-  })
-  const cancel = () => {
+  const [content, setContent] = useState<JSX.Element | null>()
+  const closeModal = () => {
     setOpen(false)
   }
 
-  const confirm = (callback: () => void) => {
-    callback()
-    setOpen(false)
-  }
-
-  const openModal = (data: ModalContentType) => {
-    setContent(data)
+  const openModal = (content: JSX.Element) => {
+    setContent(content)
     setOpen(true)
   }
 
@@ -30,14 +20,11 @@ export const ModalContextProvider: React.FunctionComponent<
     <ModalContext.Provider
       value={{
         openModal,
-        cancel,
-        confirm,
+        closeModal,
       }}
     >
       {props.children}
-      {open && (
-        <Modal open={open} title={content.title} content={content.content} />
-      )}
+      {open && content}
     </ModalContext.Provider>
   )
 }
