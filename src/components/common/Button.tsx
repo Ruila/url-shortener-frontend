@@ -10,7 +10,7 @@ function Button(props: ButtonType): JSX.Element {
   return (
     <div
       className={
-        "px-4 text-[12px] cursor-pointer py-1 rounded-[15px] drop-shadow-md text-white"
+        "px-4 text-[12px] cursor-pointer py-1 rounded-[8px] drop-shadow-md text-white"
       }
       onClick={props.onClick}
       style={{

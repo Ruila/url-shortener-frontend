@@ -3,8 +3,8 @@ import Button from "../components/common/Button"
 import Box from "../components/common/Box"
 import TextField from "../components/common/TextField"
 import { useNavigate } from "react-router-dom"
-import { axiosInstance } from "../api/axiosInterceptors"
 import { HttpStatusCode } from "axios"
+import { Apis } from "../api/api"
 
 function Login(): JSX.Element {
   const navigate = useNavigate()
@@ -12,9 +12,9 @@ function Login(): JSX.Element {
   const [password, setPassword] = useState<string>("")
 
   const login = async () => {
-    const res = await axiosInstance.post("/login", {
+    const res = await Apis.login({
       name: name,
-      password: name,
+      password: password,
     })
     if (res.status === HttpStatusCode.Ok) {
       navigate("/overview")
@@ -37,7 +37,13 @@ function Login(): JSX.Element {
             onChange={event => setPassword(event.target.value)}
           />
         </div>
-        <div className="w-full flex justify-end">
+        <div className="w-full flex justify-between items-center">
+          <div
+            className="cursor-pointer text-[10px] text-[#ff4444] underline"
+            onClick={() => navigate("/sign-up")}
+          >
+            go to sign up
+          </div>
           <Button text="login" onClick={login} />
         </div>
       </Box>
