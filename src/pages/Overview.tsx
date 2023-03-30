@@ -1,9 +1,11 @@
-import React, { useContext } from "react"
+import React, { useContext, useState } from "react"
 import Box from "../components/common/Box"
 import TableRow from "../components/common/TableRow"
 import TableHeader from "../components/common/TableHeader"
 import { ModalContext } from "../store/context/ModalContext"
 import Modal from "../components/common/Modal"
+import TextField from "../components/common/TextField"
+import Button from "../components/common/Button"
 
 const data = [
   {
@@ -41,7 +43,8 @@ const data = [
 ]
 function Overview(): JSX.Element {
   const ctx = useContext(ModalContext)
-
+  const [originUrl, setOriginUrl] = useState<string>("")
+  const [shortenUrl, setShortenUrl] = useState<string>("")
   const handleDelete = () => {
     ctx.openModal(
       <Modal
@@ -52,6 +55,8 @@ function Overview(): JSX.Element {
       />
     )
   }
+
+  const generateShortenUrl = () => {}
 
   const renderURLs = data.map(item => (
     <TableRow
@@ -64,10 +69,23 @@ function Overview(): JSX.Element {
 
   return (
     <div className="flex justify-center items-center h-full">
-      <Box>
+      <Box classes="mr-4">
         <div className="text-[24px] mb-4">URL Overview</div>
         <TableHeader />
         <div className="h-[380px] overflow-auto">{renderURLs}</div>
+      </Box>
+      <Box>
+        <div className="flex items-center">
+          <TextField
+            label="Origin Url"
+            value={originUrl}
+            onChange={event => setOriginUrl(event.target.value)}
+          >
+            <Button classes="ml-2" text="submit" onClick={generateShortenUrl} />
+          </TextField>
+        </div>
+        <div className="my-2">Shorten Url:</div>
+        <div>{shortenUrl ? "null" : "null"}</div>
       </Box>
     </div>
   )

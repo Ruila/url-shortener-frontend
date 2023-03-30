@@ -1,4 +1,4 @@
-import React, { ChangeEventHandler } from "react"
+import React, { ChangeEventHandler, PropsWithChildren } from "react"
 
 type TextFieldType = {
   label: string
@@ -6,15 +6,18 @@ type TextFieldType = {
   onChange: ChangeEventHandler<HTMLInputElement>
 }
 
-function TextField(props: TextFieldType): JSX.Element {
+function TextField(props: PropsWithChildren<TextFieldType>): JSX.Element {
   return (
     <div>
       <div className="my-2">{props.label}:</div>
-      <input
-        className="border-[1px] border-solid border-[#e0e0e0] px-2 py-1 w-full rounded-[3px]"
-        value={props.value}
-        onChange={props.onChange}
-      />
+      <div className="flex items-center">
+        <input
+          className="border-[1px] border-solid border-[#e0e0e0] px-2 py-1 w-full rounded-[3px]"
+          value={props.value}
+          onChange={props.onChange}
+        />
+        {props.children}
+      </div>
     </div>
   )
 }
