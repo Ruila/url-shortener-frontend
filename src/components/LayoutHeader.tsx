@@ -1,16 +1,12 @@
-import React, { useContext } from "react"
+import React from "react"
 import Button from "./common/Button"
 import { useNavigate } from "react-router-dom"
-import { UserContext } from "../store/context/UserContext"
 
 function LayoutHeader(): JSX.Element {
   const navigate = useNavigate()
-  const context = useContext(UserContext)
   const logout = () => {
-    context.onChangeUserData({
-      name: "",
-      accessToken: null,
-    })
+    localStorage.setItem("user-id", "")
+    localStorage.setItem("jwt-token", "")
     navigate("/login")
   }
   return (
