@@ -10,17 +10,22 @@ import { GetUrlsResponse } from "../types/GetUrlsResponse"
 import { Apis } from "../api/api"
 
 function Overview(): JSX.Element {
-  const ctx = useContext(ModalContext)
+  const context = useContext(ModalContext)
   const [data, setData] = useState<GetUrlsResponse>([])
   const [originUrl, setOriginUrl] = useState<string>("")
   const [shortenUrl, setShortenUrl] = useState<string>("")
-  const handleDelete = () => {
-    ctx.openModal(
+  const confirmDelete = async (urlId: number) => {
+    await Apis.deleteUrl({ urlId })
+    await getData()
+    context.closeModal()
+  }
+  const handleDelete = (urlId: number) => {
+    context.openModal(
       <Modal
         title="Delete"
         content="do you want to delete this url ?"
-        confirm={() => {}}
-        cancel={ctx.closeModal}
+        confirm={() => confirmDelete(urlId)}
+        cancel={context.closeModal}
       />
     )
   }
@@ -51,6 +56,7 @@ function Overview(): JSX.Element {
       originURL={item.origin_url}
       viewed={item.viewed}
       delete={handleDelete}
+      urlId={item.id}
     />
   ))
 

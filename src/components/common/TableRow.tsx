@@ -2,10 +2,11 @@ import React from "react"
 import Button from "./Button"
 
 type TableRowType = {
+  urlId: number
   shortenURL: string
   originURL: string
   viewed: number
-  delete: () => void
+  delete: (urlId: number) => void
 }
 
 function TableRow(props: TableRowType): JSX.Element {
@@ -15,7 +16,11 @@ function TableRow(props: TableRowType): JSX.Element {
       <div className="flex-[4] break-all">{props.originURL}</div>
       <div className="flex-1 min-w-[40px]">{props.viewed}</div>
       <div className="flex-[2] flex justify-between">
-        <Button color="#fc5151" text="delete" onClick={props.delete} />
+        <Button
+          color="#fc5151"
+          text="delete"
+          onClick={() => props.delete(props.urlId)}
+        />
       </div>
     </div>
   )
