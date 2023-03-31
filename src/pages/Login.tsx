@@ -19,7 +19,7 @@ function Login(): JSX.Element {
     if (res.status === HttpStatusCode.Ok) {
       localStorage.setItem("user-id", String(res.data.id))
       localStorage.setItem("jwt-token", res.data.accessToken)
-      navigate("/overview")
+      navigate("/")
     }
   }
 

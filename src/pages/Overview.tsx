@@ -34,7 +34,15 @@ function Overview(): JSX.Element {
     getData()
   }, [])
 
-  const generateShortenUrl = () => {}
+  const generateShortenUrl = async () => {
+    const response = await Apis.generateShortenUrl({
+      createdBy: Number(localStorage.getItem("user-id")),
+      originUrl: originUrl,
+    })
+    console.info(response.data)
+    setShortenUrl(response.data.shortenUrl)
+    await getData()
+  }
 
   const renderURLs = data.map(item => (
     <TableRow
@@ -64,7 +72,7 @@ function Overview(): JSX.Element {
           </TextField>
         </div>
         <div className="my-2">Shorten Url:</div>
-        <div>{shortenUrl ? "null" : "null"}</div>
+        <div>{shortenUrl ? shortenUrl : "null"}</div>
       </Box>
     </div>
   )

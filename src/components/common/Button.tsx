@@ -10,7 +10,7 @@ type ButtonType = {
 function Button(props: ButtonType): JSX.Element {
   return (
     <div
-      className={`px-4 text-[12px] cursor-pointer py-1 rounded-[8px] drop-shadow-md text-white ${props.classes}`}
+      className={`px-4 text-[12px] cursor-pointer py-2 rounded-[8px] drop-shadow-md text-white ${props.classes}`}
       onClick={props.onClick}
       style={{
         backgroundColor: props.color ? props.color : "#2d84ff",

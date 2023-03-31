@@ -30,7 +30,7 @@ export const Apis = {
   generateShortenUrl: (
     data: GenerateShortenUrlRequest
   ): Promise<AxiosResponse<GenerateShortenUrlResponse>> => {
-    return axiosInstance.post("/urls", {
+    return axiosInstance.post("/url", {
       ...data,
     })
   },
