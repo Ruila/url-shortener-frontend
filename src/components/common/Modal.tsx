@@ -7,7 +7,10 @@ type ModalType = {
   title: string
   content: string | JSX.Element
   confirm: () => void
+  confirmText: string
   cancel: () => void
+  cancelText: string
+  showCancel?: boolean
 }
 
 function Modal(props: PropsWithChildren<ModalType>): JSX.Element {
@@ -16,9 +19,17 @@ function Modal(props: PropsWithChildren<ModalType>): JSX.Element {
       <Box>
         <div className="text-[24px]">{props.title}</div>
         <div className="mt-4">{props.content}</div>
-        <div className="flex justify-between mt-8">
-          <Button text="cancel" onClick={props.cancel} />
-          <Button text="confirm" onClick={props.confirm} />
+        <div className="flex justify-end mt-8">
+          {props.showCancel ? (
+            <Button
+              classes="mr-2"
+              text={props.cancelText}
+              onClick={props.cancel}
+            />
+          ) : (
+            <></>
+          )}
+          <Button text={props.confirmText} onClick={props.confirm} />
         </div>
       </Box>
     </div>,

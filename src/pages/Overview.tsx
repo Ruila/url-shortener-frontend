@@ -8,6 +8,7 @@ import TextField from "../components/common/TextField"
 import Button from "../components/common/Button"
 import { GetUrlsResponse } from "../types/GetUrlsResponse"
 import { Apis } from "../api/api"
+import { verifyUrl } from "../utils/verifyUrl"
 
 function Overview(): JSX.Element {
   const context = useContext(ModalContext)
@@ -25,6 +26,9 @@ function Overview(): JSX.Element {
         title="Delete"
         content="do you want to delete this url ?"
         confirm={() => confirmDelete(urlId)}
+        confirmText="confirm"
+        cancelText="cancel"
+        showCancel={true}
         cancel={context.closeModal}
       />
     )
@@ -40,13 +44,36 @@ function Overview(): JSX.Element {
   }, [])
 
   const generateShortenUrl = async () => {
-    const response = await Apis.generateShortenUrl({
-      createdBy: Number(localStorage.getItem("user-id")),
-      originUrl: originUrl,
-    })
-    console.info(response.data)
-    setShortenUrl(response.data.shortenUrl)
-    await getData()
+    if (!verifyUrl(originUrl))
+      return context.openModal(
+        <Modal
+          title="Error"
+          content="This url is invalid."
+          confirm={context.closeModal}
+          confirmText="OK"
+          cancelText="cancel"
+          cancel={context.closeModal}
+        />
+      )
+    try {
+      const response = await Apis.generateShortenUrl({
+        createdBy: Number(localStorage.getItem("user-id")),
+        originUrl: originUrl,
+      })
+      setShortenUrl(response.data.shortenUrl)
+      await getData()
+    } catch (err) {
+      context.openModal(
+        <Modal
+          title="Error"
+          content="This url is invalid."
+          confirm={context.closeModal}
+          confirmText="OK"
+          cancelText="cancel"
+          cancel={context.closeModal}
+        />
+      )
+    }
   }
 
   const renderURLs = data.map(item => (
