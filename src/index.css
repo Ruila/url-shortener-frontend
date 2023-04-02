@@ -9,3 +9,8 @@ html, body, #root {
 #root {
     background-color: #4bbfffb8;
 }
+
+a {
+    color: #1066d2;
+    text-decoration: underline;
+}

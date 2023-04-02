@@ -92,7 +92,7 @@ function Overview(): JSX.Element {
       <Box classes="mr-4 flex-1">
         <div className="text-[24px] mb-4">URL Overview</div>
         <TableHeader />
-        <div className="h-[380px] overflow-auto">{renderURLs}</div>
+        <div className="h-[320px] overflow-auto">{renderURLs}</div>
       </Box>
       <Box>
         <div className="flex items-center">
